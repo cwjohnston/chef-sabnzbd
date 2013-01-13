@@ -72,6 +72,16 @@ when 'runit'
     action :nothing
   end
 
+  # Configure a resource to start, stop and restart the service
+  # This can be merged with the runit_service resource when CHEF-2336 and CHEF-154 are resolved.
+  service "sabnzbd" do
+    stop_command "sv stop sabnzbd"
+    restart_command "sv restart sabnzbd"
+    reload_command "sv hup sabnzbd"
+    supports :status => true, :restart => true, :reload => true
+    action :nothing
+  end
+
 when 'bluepill'
   include_recipe 'bluepill'
 
@@ -99,7 +109,7 @@ git node['sabnzbd']['install_dir'] do
   group node['sabnzbd']['group']
   case node["sabnzbd"]["init_style"]
   when 'runit'
-    notifies :restart, 'runit_service[sabnzbd]', :immediately
+    notifies :restart, 'service[sabnzbd]', :immediately
   when 'bluepill'
     notifies :restart, 'bluepill_service[sabnzbd]', :immediately
   end
@@ -107,7 +117,7 @@ end
 
 case node["sabnzbd"]["init_style"]
 when 'runit'
-  runit_service "sabnzbd" do
+  service "sabnzbd" do
     action [:enable, :start]
   end
 when 'bluepill'
