@@ -62,18 +62,17 @@ data_dirs.each do |y|
   end
 end
 
-git node['sabnzbd']['install_dir'] do
-  repository node['sabnzbd']['git_url']
-  revision node['sabnzbd']['git_ref']
-  action :sync
-  user node['sabnzbd']['user']
-  group node['sabnzbd']['group']
-  notifies :restart, 'bluepill_service[sabnzbd]', :immediately
-end
+case node["sabnzbd"]["init_style"]
+when 'runit'
+  include_recipe 'runit'
 
-case node['sabnzbd']['init_style']
+  runit_service 'sabnzbd' do
+    owner node['sabnzbd']['user']
+    group node['sabnzbd']['group']
+    action :nothing
+  end
+
 when 'bluepill'
-
   include_recipe 'bluepill'
 
   template "#{node["bluepill"]["conf_dir"]}/sabnzbd.pill" do
@@ -84,11 +83,35 @@ when 'bluepill'
   end
 
   bluepill_service 'sabnzbd' do
-    action [:enable, :load, :start]
+    action :nothing
   end
-
 else
   Chef::Log.warn(
     'sabnzbd >> invalid init_style specified, manual intervention required to start service.'
   )
+end
+
+git node['sabnzbd']['install_dir'] do
+  repository node['sabnzbd']['git_url']
+  revision node['sabnzbd']['git_ref']
+  action :sync
+  user node['sabnzbd']['user']
+  group node['sabnzbd']['group']
+  case node["sabnzbd"]["init_style"]
+  when 'runit'
+    notifies :restart, 'runit_service[sabnzbd]', :immediately
+  when 'bluepill'
+    notifies :restart, 'bluepill_service[sabnzbd]', :immediately
+  end
+end
+
+case node["sabnzbd"]["init_style"]
+when 'runit'
+  runit_service "sabnzbd" do
+    action [:enable, :start]
+  end
+when 'bluepill'
+  bluepill_service "sabnzbd" do
+    action [:enable, :load, :start]
+  end
 end
