@@ -1,0 +1,4 @@
+#!/bin/bash
+exec 2>&1
+cd <%= node['sabnzbd']['install_dir'] %>
+exec chpst -u <%= node['sabnzbd']['user'] %> python SABnzbd.py -s <%= node['sabnzbd']['listen_address'] %>:<%= node['sabnzbd']['listen_port'] %> -f <%= node['sabnzbd']['config_dir'] %>/sabnzbd.ini -b 0 -l 1
