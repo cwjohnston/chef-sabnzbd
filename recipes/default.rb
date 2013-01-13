@@ -118,7 +118,7 @@ end
 case node["sabnzbd"]["init_style"]
 when 'runit'
   service "sabnzbd" do
-    action [:enable, :start]
+    action :start
   end
 when 'bluepill'
   bluepill_service "sabnzbd" do
