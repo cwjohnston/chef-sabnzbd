@@ -67,8 +67,6 @@ when 'runit'
   include_recipe 'runit'
 
   runit_service 'sabnzbd' do
-    owner node['sabnzbd']['user']
-    group node['sabnzbd']['group']
     action :nothing
   end
 
