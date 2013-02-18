@@ -33,6 +33,8 @@ user node['sabnzbd']['user'] do
   system true
 end
 
+group node['sabnzbd']['group']
+
 app_dirs = [
   node['sabnzbd']['install_dir'],
   node['sabnzbd']['config_dir'],
