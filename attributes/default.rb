@@ -30,7 +30,7 @@ default['sabnzbd']['run_dir'] = '/var/run/sabnzbd'
 default['sabnzbd']['log_dir'] = '/var/log/sabnzbd'
 
 # Valid Options:
-#  bluepill
+#  bluepill, runit
 default['sabnzbd']['init_style'] = 'bluepill'
 
 # Valid Options:
