@@ -30,8 +30,6 @@ package 'util-linux'				  #  ionice
 
 user node['sabnzbd']['user'] do
   shell '/bin/bash'
-  comment 'Web Application - SABnzbd'
-  home node['sabnzbd']['install_dir']
   system true
 end
 
