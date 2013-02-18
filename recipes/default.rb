@@ -66,19 +66,7 @@ case node["sabnzbd"]["init_style"]
 when 'runit'
   include_recipe 'runit'
 
-  runit_service 'sabnzbd' do
-    action :nothing
-  end
-
-  # Configure a resource to start, stop and restart the service
-  # This can be merged with the runit_service resource when CHEF-2336 and CHEF-154 are resolved.
-  service "sabnzbd" do
-    stop_command "sv stop sabnzbd"
-    restart_command "sv restart sabnzbd"
-    reload_command "sv hup sabnzbd"
-    supports :status => true, :restart => true, :reload => true
-    action :nothing
-  end
+  runit_service 'sabnzbd'
 
 when 'bluepill'
   include_recipe 'bluepill'
