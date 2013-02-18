@@ -10,5 +10,5 @@ version '1.1.2'
 end
 
 depends 'bluepill'
-depends 'runit'
+depends 'runit', '~> 1.0.4'
 depends 'git'
