@@ -1,3 +1,4 @@
+name             "sabnzbd"
 maintainer       "Alex Howells"
 maintainer_email "alex@howells.me"
 license          "Apache 2.0"
