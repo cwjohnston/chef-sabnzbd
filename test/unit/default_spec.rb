@@ -77,6 +77,7 @@ describe 'sabnzbd::default' do
 
     it 'enables the bluepill service' do
       pending 'implementation of bluepill chefspec matchers'
+      expect(chef_run).to enable_bluepill_service('sabnzbd')
     end
   end
 
