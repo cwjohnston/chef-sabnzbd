@@ -62,7 +62,7 @@ data_dirs.each do |y|
   end
 end
 
-case node["sabnzbd"]["init_style"]
+case node['sabnzbd']['init_style']
 when 'runit'
   include_recipe 'runit'
 
@@ -93,7 +93,7 @@ git node['sabnzbd']['install_dir'] do
   action :sync
   user node['sabnzbd']['user']
   group node['sabnzbd']['group']
-  case node["sabnzbd"]["init_style"]
+  case node['sabnzbd']['init_style']
   when 'runit'
     notifies :restart, 'service[sabnzbd]', :immediately
   when 'bluepill'
@@ -101,13 +101,13 @@ git node['sabnzbd']['install_dir'] do
   end
 end
 
-case node["sabnzbd"]["init_style"]
+case node['sabnzbd']['init_style']
 when 'runit'
-  service "sabnzbd" do
+  service 'sabnzbd' do
     action :start
   end
 when 'bluepill'
-  bluepill_service "sabnzbd" do
+  bluepill_service 'sabnzbd' do
     action [:enable, :load, :start]
   end
 end
