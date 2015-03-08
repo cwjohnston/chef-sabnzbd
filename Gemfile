@@ -7,12 +7,12 @@ group :integration do
 end
 
 gem 'librarian-chef', '~> 0.0.4'
-gem 'foodcritic', '>= 3.0.3'
+gem 'foodcritic', '~> 4.0'
 gem 'chefspec', '~> 4.2'
-gem 'chef', '~> 12'
+gem 'chef', '~> 12.1'
 gem 'finstyle'
 gem 'guard-rubocop'
 gem 'guard-rspec'
 gem 'guard-foodcritic',
   :git => 'https://github.com/Nordstrom/guard-foodcritic.git',
-  :ref => '654f7d1d54d20de0ac73eff39ffeac53114e5f00'
+  :ref => 'use_guard_v2_api'
