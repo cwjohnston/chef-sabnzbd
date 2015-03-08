@@ -1,0 +1,7 @@
+site 'https://supermarket.getchef.com/api/v1'
+
+cookbook 'sabnzbd', :path => '.'
+
+# common integration dependencies
+cookbook 'apt'
+cookbook 'yum'
