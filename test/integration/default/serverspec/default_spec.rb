@@ -1,6 +1,5 @@
-require 'serverspec'
-set :backend, :exec
+require 'spec_helper'
 
-describe service('sabnzbd') do
-  it { should be_running }
+describe 'default' do
+  it_behaves_like 'sabnzbd'
 end
