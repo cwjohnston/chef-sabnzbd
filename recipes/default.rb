@@ -17,16 +17,16 @@
 # limitations under the License.
 #
 
-include_recipe "git"
+include_recipe 'git'
 
-package "par2"
-package "unrar"
-package "unzip"
-package "python-yenc"
-package "python-cheetah"
-package "python-openssl"			# Package contains --
-package "coreutils"				    #  nice
-package "util-linux"				  #  ionice
+package 'par2'
+package 'unrar'
+package 'unzip'
+package 'python-yenc'
+package 'python-cheetah'
+package 'python-openssl'			# Package contains --
+package 'coreutils'				    #  nice
+package 'util-linux'				  #  ionice
 
 user node['sabnzbd']['user'] do
   shell '/bin/bash'
@@ -35,10 +35,10 @@ user node['sabnzbd']['user'] do
   system true
 end
 
-app_dirs = [ 
-  node['sabnzbd']['install_dir'], 
-  node['sabnzbd']['config_dir'], 
-  node['sabnzbd']['run_dir'], 
+app_dirs = [
+  node['sabnzbd']['install_dir'],
+  node['sabnzbd']['config_dir'],
+  node['sabnzbd']['run_dir'],
   node['sabnzbd']['log_dir']
 ]
 
@@ -51,13 +51,10 @@ app_dirs.each do |x|
   end
 end
 
-data_dirs = [
-  "complete", "incomplete", "logs", "nzb_backup",
-  "scripts", "templates", "watch"
-  ]
+data_dirs = %w(complete incomplete logs nzb_backup scripts templates watch)
 
 data_dirs.each do |y|
-  directory "#{node['sabnzbd']['data_dir']}/#{y}" do
+  directory "#{node["sabnzbd"]["data_dir"]}/#{y}" do
     mode 0755
     owner node['sabnzbd']['user']
     group node['sabnzbd']['group']
@@ -67,29 +64,29 @@ end
 
 git node['sabnzbd']['install_dir'] do
   repository node['sabnzbd']['git_url']
-  revision node['sabnzbd']['git_ref']                                   
-  action :sync                                     
-  user node['sabnzbd']['user']                 
-  group node['sabnzbd']['group']                      
-  notifies :restart, "bluepill_service[sabnzbd]", :immediately
+  revision node['sabnzbd']['git_ref']
+  action :sync
+  user node['sabnzbd']['user']
+  group node['sabnzbd']['group']
+  notifies :restart, 'bluepill_service[sabnzbd]', :immediately
 end
 
-case node["sabnzbd"]["init_style"]
+case node['sabnzbd']['init_style']
 when 'bluepill'
 
-  include_recipe "bluepill"
+  include_recipe 'bluepill'
 
-  template "#{node['bluepill']['conf_dir']}/sabnzbd.pill" do
-    source "sabnzbd.pill.erb"
+  template "#{node["bluepill"]["conf_dir"]}/sabnzbd.pill" do
+    source 'sabnzbd.pill.erb'
     mode 0644
-    notifies :load, "bluepill_service[sabnzbd]", :immediately
-    notifies :restart, "bluepill_service[sabnzbd]", :immediately
+    notifies :load, 'bluepill_service[sabnzbd]', :immediately
+    notifies :restart, 'bluepill_service[sabnzbd]', :immediately
   end
 
-  bluepill_service "sabnzbd" do
+  bluepill_service 'sabnzbd' do
     action [:enable, :load, :start]
   end
 
 else
-  Chef::Log.warn("sabnzbd::service >> unable to determine valid init_style, manual intervention will be needed to start SABnzbd as a service.")
+  Chef::Log.warn('sabnzbd::service >> unable to determine valid init_style, manual intervention will be needed to start SABnzbd as a service.')
 end

@@ -16,27 +16,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-default["sabnzbd"]["user"] = 'sabnzbd'
-default["sabnzbd"]["group"] = 'sabnzbd'
+default['sabnzbd']['user'] = 'sabnzbd'
+default['sabnzbd']['group'] = 'sabnzbd'
 
-default["sabnzbd"]["listen_address"] = '0.0.0.0'
-default["sabnzbd"]["listen_port"] = '8080'
+default['sabnzbd']['listen_address'] = '0.0.0.0'
+default['sabnzbd']['listen_port'] = '8080'
 
-default["sabnzbd"]["install_dir"] = '/srv/apps/sabnzbd'
-default["sabnzbd"]["config_dir"] = '/etc/sabnzbd'
-default["sabnzbd"]["data_dir"] = '/media/sabnzbd'
+default['sabnzbd']['install_dir'] = '/srv/apps/sabnzbd'
+default['sabnzbd']['config_dir'] = '/etc/sabnzbd'
+default['sabnzbd']['data_dir'] = '/media/sabnzbd'
 
-default["sabnzbd"]["run_dir"] = '/var/run/sabnzbd'
-default["sabnzbd"]["log_dir"] = '/var/log/sabnzbd'
+default['sabnzbd']['run_dir'] = '/var/run/sabnzbd'
+default['sabnzbd']['log_dir'] = '/var/log/sabnzbd'
 
-# Valid Options: 
+# Valid Options:
 #  bluepill
-default["sabnzbd"]["init_style"] = 'bluepill'
+default['sabnzbd']['init_style'] = 'bluepill'
 
-# Valid Options: 
+# Valid Options:
 #  git
-default["sabnzbd"]["install_style"] = 'git'
+default['sabnzbd']['install_style'] = 'git'
 
 # Git Options
-default["sabnzbd"]["git_url"] = 'https://github.com/sabnzbd/sabnzbd.git'
-default["sabnzbd"]["git_ref"] = '10b740374895704bde1c7fb99995be6e9c913d8d'
+default['sabnzbd']['git_url'] = 'https://github.com/sabnzbd/sabnzbd.git'
+default['sabnzbd']['git_ref'] = '10b740374895704bde1c7fb99995be6e9c913d8d'
