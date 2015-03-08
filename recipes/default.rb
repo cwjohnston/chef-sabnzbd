@@ -88,5 +88,7 @@ when 'bluepill'
   end
 
 else
-  Chef::Log.warn('sabnzbd::service >> unable to determine valid init_style, manual intervention will be needed to start SABnzbd as a service.')
+  Chef::Log.warn(
+    'sabnzbd >> invalid init_style specified, manual intervention required to start service.'
+  )
 end
