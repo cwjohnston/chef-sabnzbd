@@ -38,7 +38,6 @@ describe 'sabnzbd::default' do
   it 'creates sabnzbd user' do
     expect(chef_run).to create_user(sab_user).with(
       :shell => '/bin/bash',
-      :home => install_dir,
       :system => true
     )
   end
