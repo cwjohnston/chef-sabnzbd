@@ -18,3 +18,9 @@ suites:
     run_list:
       - recipe[sabnzbd::default]
     attributes:
+  - name: runit
+    run_list:
+      - recipe[sabnzbd::default]
+    attributes:
+      sabnzbd:
+        init_style: runit
